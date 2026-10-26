@@ -1,0 +1,16 @@
+# Personal or generated evidence
+*.mp4
+*.mkv
+*.pdf
+.env
+.env.*
+!.env.example
+secrets/
+raw/
+out/
+coverage/
+*.exe
+*.test
+*.prof
+.DS_Store
+Thumbs.db

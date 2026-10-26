@@ -1,0 +1,28 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const assert = require('node:assert/strict');
+const root = __dirname;
+vm.runInThisContext(fs.readFileSync(path.join(root, 'damage-prototype.js'), 'utf8'));
+vm.runInThisContext(fs.readFileSync(path.join(root, 'pdf-plan.js'), 'utf8'));
+const fixture = JSON.parse(fs.readFileSync(path.join(root, 'scenario.json'), 'utf8'));
+assert.equal(fixture.status, 'approximate-legacy-snapshot-not-game-ground-truth');
+console.log(furyDamageSelfTest());
+const plan = furyPdfPlan(fixture.config, fixture.skills, fixture.utilityCastSeconds, false);
+const result = furyDamageCore(fixture.config, fixture.skills, plan.rotation);
+assert.equal(plan.rotation.length, fixture.expected.actions);
+assert.equal(result.counts.explosion, fixture.expected.explosions);
+assert.ok(Math.abs(result.total - fixture.expected.total) < 0.000001);
+const starts = result.log.filter(r => r[1] === 'Применение');
+assert.equal(starts.length, plan.rotation.length);
+starts.forEach((r, i) => assert.ok(Math.abs(r[0] - plan.rotation[i][0]) < 0.000001));
+const csv = fs.readFileSync(path.join(root, '..', 'observations', 'dot-observations.csv'), 'utf8').trim().split(/\r?\n/);
+assert.equal(csv.length - 1, 13);
+csv.slice(1).forEach(line => {
+  const cols = line.split(',');
+  assert.equal(cols.length, 13);
+  const total = Number(cols[7]), terminal = Number(cols[8]), ticks = Number(cols[9]);
+  assert.ok(total > terminal && terminal >= 0 && ticks > 0);
+});
+console.log('Legacy snapshot replayed: 174 actions; 13 observations structurally valid.');
+console.log('This is NOT validation of complete Throne and Liberty damage rules.');

@@ -1,0 +1,14 @@
+source,id,equipment,skill,cast_approx_seconds,distance_m,stacks,total,terminal,full_ticks,critical_inferred,heavy_inferred,role
+recording-a,A-T1,full,despair,7,4,2,15187,176,16,1,0,comparison
+recording-a,A-T2,full,despair,36,9,2,24487,328,16,0,1,comparison
+recording-a,A-T3,full,despair,56,9,2,32824,470,16,1,1,comparison
+recording-a,A-T4,full,despair,76,9,2,12247,164,16,0,0,calibration
+recording-b,W-T1,white,despair,77,9,2,4787,64,16,1,0,comparison
+recording-b,W-T2,white,despair,96,9,2,4392,59,16,0,0,within-recording-reference
+recording-b,W-T3,white,despair,114.5,9,1,2394,30,16,1,0,comparison
+recording-b,W-F1,white,finger,138.5,9,1,4125,72,13,0,0,within-recording-reference
+recording-b,W-F2,white,finger,155.5,9,1,4497,84,13,1,0,comparison
+recording-b,W-F3,white,finger,172.5,9,1,4498,80,13,1,0,comparison
+recording-b,G-F1,full,finger,240,9,1,14590,240,13,1,0,cross-skill-comparison
+recording-b,G-F2,full,finger,256,9,1,14585,223,13,1,0,cross-skill-comparison
+recording-b,G-F3,full,finger,271.5,9,1,29174,517,13,1,1,cross-skill-comparison
